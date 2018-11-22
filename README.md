@@ -1,5 +1,5 @@
 
-![](https://raw.githubusercontent.com/gtatters/ARGHCodingClub/master/Images/ARGHlogo.jpg)
+<img src="https://raw.githubusercontent.com/gtatters/ARGHCodingClub/master/Images/ARGHlogo.jpg" alt="ARGH logo" width="200"/>
 
 ## ARGH Coding Club
 
