@@ -32,6 +32,6 @@ Data and code examples will be uploaded to this site.
 
 ## Contact
 
-- Glenn Tattersall
-- Department of Biological Sciences
-- Brock University
+Glenn Tattersall  
+Department of Biological Sciences  
+Brock University
