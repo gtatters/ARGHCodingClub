@@ -10,8 +10,9 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 ## When and Where
 
 - Biweekly meetings, starting Monday, January 14
-- 12 - 1 pm (unless otherwise noted)
+- 12 - 1 pm (unless otherwise noted) 
 - MacKenzie Chown Room F237 (unless room unavailable)
+- Pack your Lunch and Laptop
 
 ## Schedule (Tentative)
 
