@@ -1,5 +1,5 @@
 
-<img src="https://raw.githubusercontent.com/gtatters/ARGHCodingClub/master/Images/ARGHlogo.jpg" alt="ARGH logo" width="600" align="center"/>
+<img src="https://raw.githubusercontent.com/gtatters/ARGHCodingClub/master/Images/ARGHlogo.jpg" alt="ARGH logo" width="600"/>
 
 ## ARGH Coding Club
 
