@@ -24,13 +24,12 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 
 ## Content 
 
-Each week, a lead presenter demonstrates code for a graphical, statistical, or analytical problem they have mastered or are currently working on.  Presenters may use their own data or data from published sources.  Details to follow after first meeting.  
+Each week, a lead presenter demonstrates code for a graphical, statistical, or analytical problem they have mastered or are currently working on.  Presenters may use their own data or data from published sources.  Details to follow after first meeting.
+
 Data and code examples will be uploaded to this site. 
 
 ## Contact
 
 Glenn Tattersall
-
 Department of Biological Sciences
-
 Brock University
