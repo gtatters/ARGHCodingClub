@@ -1,6 +1,7 @@
 
 # Libraries used
 library(lme4)
+
 # library(lmerTest) # we use this below but it conflicts with lme4's lmer function
 library(effects)
 library(ggplot2)
