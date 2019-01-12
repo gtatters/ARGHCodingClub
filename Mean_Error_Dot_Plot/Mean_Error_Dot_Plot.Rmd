@@ -1,4 +1,15 @@
+---
+title: "Mean_Error_Dot_Plot"
+author: "Glenn J Tattersall"
+date: '2019-01-12'
+output: html_document
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
 # Libraries used
 library(lme4)
 
@@ -132,6 +143,6 @@ biplot<-plot_grid(ET1.plot, SE_emersion.plot, labels="auto")
 biplot
 
 # ggsave("Figure 2.pdf", biplot, width=8, height=4)
-
+```
 
 
