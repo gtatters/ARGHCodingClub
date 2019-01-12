@@ -2,7 +2,7 @@
 title: "Mean_Error_Dot_Plot"
 author: "Glenn J Tattersall"
 date: '2019-01-12'
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
