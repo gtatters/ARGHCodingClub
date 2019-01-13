@@ -22,21 +22,15 @@ str(d)
 d$Order<-factor(d$Order)
 d$Treatment<-relevel(d$Treatment, ref="Opaque")
 
-
 # Calculate rates of behaviours per min
 d$SENum<-d$SENum/d$ExptDuration
 d$BSNum<-d$BSNum/d$ExptDuration
-d$LDNum<-d$LDNum/d$ExptDuration
-d$MCNum<-d$MCNum/d$ExptDuration
 d$SurfaceScore<-d$SENum+d$BSNum
 d$MirrorScore<-d$MCNum+d$LDNum
 # SE = Surface Excursion
 # BS = Break Surface
-# LD = Lateral Display (toward Mirror)
-# MC = Mirror Charge
 # Normalise the counts to the duration of the experiment
 
-# Note: We only really need the Treatment and ET1 columns for this exercise
 
 # Create two functions to allow 95% CI to be calculated
 lower<-function(x){
@@ -64,7 +58,7 @@ ds
 # Model Fits ####
 lmET1<-lmer(ET1 ~ Treatment + Order + (1|FishID), data=d)
 # Explicitly call lmerTest's lmer function:
-lmET1<-lmerTest::lmer(ET1 ~ Treatment  + (1|FishID), data=d)
+lmET1<-lmerTest::lmer(ET1 ~ Treatment + Order + (1|FishID), data=d)
 summary(lmET1)
 
 anova(lmET1, ddf="Satterthwaite")
@@ -80,7 +74,26 @@ effET1
 
 
 # Emersion Threshold Figure ####
+
 dodge<-position_dodge(width=.1)
+ET1.plot<-ggplot()+
+  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), 
+            col="grey", position=dodge)
+ET1.plot
+
+ET1.plot<-ggplot()+
+  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), col="grey", position=dodge)+
+  geom_point(data=d, aes(x=Treatment, y=ET1, fill=Treatment, group=FishID), shape=21, position=dodge, size=0.5)
+ET1.plot
+
+ET1.plot<-ggplot()+
+  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), col="grey", position=dodge)+
+  geom_point(data=d, aes(x=Treatment, y=ET1, fill=Treatment, group=FishID), shape=21, position=dodge, size=0.5)+
+  geom_errorbar(data=effET1, aes(x=Treatment, ymin=lower, ymax=upper), width=0.05, size=0.5)+
+  geom_point(data=effET1, aes(x=Treatment, y=fit, fill=Treatment), col="black", shape=21, size=3)
+ET1.plot
+
+# Using the model effects:
 ET1.plot<-ggplot()+
   geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), col="grey", position=dodge)+
   geom_point(data=d, aes(x=Treatment, y=ET1, fill=Treatment, group=FishID), shape=21, position=dodge, size=0.5)+
@@ -97,7 +110,26 @@ ET1.plot<-ggplot()+
   theme(panel.border = element_rect(fill=NA, colour=NA))
 ET1.plot
 
-
+# Using the group means +- se values: 
+ET1.plot<-ggplot()+
+  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), 
+            col="grey", position=dodge)+
+  geom_point(data=d, aes(x=Treatment, y=ET1, fill=Treatment, group=FishID),
+             shape=21, position=dodge, size=0.5)+
+  geom_errorbar(data=ds, aes(x=Treatment, ymin=lower, ymax=upper), 
+                width=0.05, size=0.5)+
+  geom_point(data=ds, aes(x=Treatment, y=mean, fill=Treatment), 
+             col="black", shape=21, size=3)+
+  #annotate("label", x=1.5, y=43.5, label = effET1$P[1], size=3, label.size=NA)+
+  scale_fill_manual(values=c("black", "white"), name="", guide=F)+
+  ylab("Emersion\nTemperature (°C)")+
+  xlab("Treatment")+
+  ylim(39,43.5)+
+  theme_classic()+
+  #  ggtheme(10,0.3)+
+  theme(legend.position=c(0.15,0.85))+
+  theme(panel.border = element_rect(fill=NA, colour=NA))
+ET1.plot
 
 # ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds.pdf", ET1.plot,  width=4, height=4)
 
