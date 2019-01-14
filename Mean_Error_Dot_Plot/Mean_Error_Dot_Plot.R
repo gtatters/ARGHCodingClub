@@ -1,3 +1,4 @@
+rm(list=ls())
 
 # Libraries used
 library(lme4)
@@ -8,7 +9,6 @@ library(ggplot2)
 library(dplyr)
 
 # Load in data
-setwd("~/Desktop")
 setwd("~/Dropbox/ARGHCodingClub/Mean_Error_Dot_Plot")
 d<-read.csv("RivulusMirrorET.csv")
 
@@ -58,7 +58,7 @@ ds
 # Model Fits ####
 lmET1<-lmer(ET1 ~ Treatment + Order + (1|FishID), data=d)
 # Explicitly call lmerTest's lmer function:
-lmET1<-lmerTest::lmer(ET1 ~ Treatment + Order + (1|FishID), data=d)
+lmET1<-lmerTest::lmer(ET1 ~ Treatment + (1|FishID), data=d)
 summary(lmET1)
 
 anova(lmET1, ddf="Satterthwaite")
@@ -77,7 +77,7 @@ effET1
 
 dodge<-position_dodge(width=.1)
 ET1.plot<-ggplot()+
-  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), 
+  geom_line(data=d, aes(x=Treatment, y=ET1,  group=FishID), 
             col="grey", position=dodge)
 ET1.plot
 
@@ -131,8 +131,14 @@ ET1.plot<-ggplot()+
   theme(panel.border = element_rect(fill=NA, colour=NA))
 ET1.plot
 
-# ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds.pdf", ET1.plot,  width=4, height=4)
+ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds.pdf", 
+       ET1.plot,  width=4, height=4)
 
+save(ET1.plot, file="Mygraph.Rda")
+
+
+ET1.plot+ 
+  xlab("Fish Treatment")
 
 lmSE<-lmer(SurfaceScore ~ Treatment + (1|FishID), d)
 lmSE<-lmerTest::lmer(SurfaceScore ~ Treatment + (1|FishID), d)
@@ -163,7 +169,7 @@ library(cowplot)
 biplot<-plot_grid(ET1.plot, SE_emersion.plot, labels=c("a)", "b)"))
 biplot
 
-# ggsave("Figure 2.pdf", biplot, width=8, height=4)
+ ggsave("Figure 2.pdf", biplot, width=8, height=4)
 
 
 
