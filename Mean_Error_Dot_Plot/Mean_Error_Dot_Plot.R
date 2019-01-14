@@ -160,7 +160,7 @@ SE_emersion.plot
 
 library(cowplot)
 
-biplot<-plot_grid(ET1.plot, SE_emersion.plot, labels="auto")
+biplot<-plot_grid(ET1.plot, SE_emersion.plot, labels=c("a)", "b)"))
 biplot
 
 # ggsave("Figure 2.pdf", biplot, width=8, height=4)
