@@ -16,7 +16,7 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 
 ## Schedule (Tentative)
 
-- [Jan 14](https://github.com/gtatters/ARGHCodingClub//tree/master/Mean_Error_Dot_Plot)
+- [Jan 14 - Mean + Error Plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Mean_Error_Dot_Plot)
 - Jan 28
 - Feb 11 - Code snippets
 - Feb 25
