@@ -7,12 +7,12 @@ library(ggplot2)
 library(sqldf)
 library(dplyr)
 
-traits <- read.csv("c:traits.csv", row.names = 1, stringsAsFactors = TRUE)
+traits <- read.csv("traits.csv", row.names = 1, stringsAsFactors = TRUE)
 traits
 x <- data.matrix(traits)
 x
 
-tree <- read.tree("c:Apidae2.tre")
+tree <- read.tree("Apidae2.tre")
 tree
 plot(tree)
 
