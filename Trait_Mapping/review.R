@@ -9,14 +9,17 @@ library(dplyr)
 
 traits <- read.csv("traits.csv", row.names = 1, stringsAsFactors = TRUE)
 traits
+
 x <- data.matrix(traits)
 x
 
 tree <- read.tree("Apidae2.tre")
 tree
+str(tree)
 plot(tree)
 
-# plot(tree, type="phylogram", adj=0, cex=, label.offset = 1, use.edge.length=FALSE, edge.width=1.5)
+plot(tree, type="phylogram", adj=0, label.offset = 0.5, 
+     use.edge.length=FALSE, edge.width=1.5)
 
 dotTree(tree, traits, legend=FALSE, method = "phylogram", standardize = FALSE)
 

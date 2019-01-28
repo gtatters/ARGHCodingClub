@@ -62,6 +62,7 @@ plot(tree, cex=0.25)
 both <- intersect(tree$tip.label, rownames(cleanData))
 tree.matched <- root(drop.tip(tree, setdiff(tree$tip.label, both)), outgroup="Dufnovaeangl")
 data.matched <- cleanData[both,]
+str(data.matched)
 
 plot(tree.matched, no.margin=TRUE, cex =.5)
 data.matched <- data.frame(rownames(data.matched), data.matched)
