@@ -1,3 +1,9 @@
+Mapping a continuous trait (field body temperature) onto a phylogeny
+====================================================================
+
+This example mirrors the example on bees by Dr. Richards, but these data
+are already in the public domain.
+
 Libraries required:
 
     library(ade4)  # source of example data and tree
@@ -6,6 +12,12 @@ Libraries required:
     library(phytools)
 
     ## Loading required package: maps
+
+Obtain your phylogeny
+---------------------
+
+We'll use the phylogeny for Lepidosauria and then match it to our trait
+data.
 
 lepidosauria\_family.nwk was derived from timetime.org by searching for
 Lepidosauria and selecting the tree option on the timetree.org website
@@ -50,7 +62,7 @@ Lepidosauria and selecting the tree option on the timetree.org website
     ## [55] "Dibamidae"         "Sphenodontidae"
 
 Mapping Tb trait onto tree
-==========================
+--------------------------
 
 Load in trait data, and assign the family names (column 1) as row.names
 
@@ -140,12 +152,13 @@ Load in trait data, and assign the family names (column 1) as row.names
 
 We have 56 taxa in the phylogeny, but only 34 data points in file for
 temperature data. Lepidosauria include lizards, snakes, tuatara, whereas
-the data file from Clusella Trullas focused on lizard families, but has
-multiple subtaxa within the Iguanidae, so the intersection of the two
-data sets will be smaller than 34.
+the data file from Clusella-Trullas et al (2008) focused on lizard
+families, but has multiple subtaxa within the Iguanidae, so the
+intersection of the two data sets will be smaller than 34, and we will
+lose data for these extra taxa.
 
-So, now create a variable called both that describes which taxa are
-found in both:
+Create a variable called **both** that describes which taxa are found in
+both:
 
     both <- intersect(tree$tip.label, rownames(lizards))
     both
@@ -181,9 +194,8 @@ in both:
 ![](LizardPhylogenyTb_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
 Data in the lizards data frame is not in the same order as the tips from
-tree, so re-arrange, although this is not likely required if you have
-the rownames defined as the taxon in both the tree object and the trait
-object.
+tree, so create a data.frame, **dat** that extracts only the data that
+corresponds to the taxa in **both**:
 
     dat <- lizards[both, ]
     rownames(dat)
@@ -198,24 +210,24 @@ object.
     ## [22] "Sphaerodactylidae" "Diplodactylidae"   "Pygopodidae"      
     ## [25] "Carphodactylidae"  "Sphenodontidae"
 
-Normalise branch lengths to 1 since they are expressed in millions of
-years since divergence.
-
-    tree$edge.length<-tree$edge.length/max(tree$edge.length) 
-
 Plot continuous trait onto phylogeny
-====================================
+------------------------------------
 
-Create a vector corresponding to the trait Tb and assign the names to
-this vector:
+First, create a vector corresponding to the trait Tb and assign the
+names to this vector:
 
     Tb<-dat$Tb
     names(Tb)<-tree.matched$tip.label
 
 Use the contMap function to create an object that is your plot, but we
-need to make further adjustments below, so set plot=F. Invert refers to
-the colour palette direction. We set this to FALSE to change the
-direction from the normal.
+need to make further adjustments below, so set plot=F initially.
+
+    objTb<-contMap(tree.matched, Tb, plot=F, type="fan", invert=T, res=300,
+                   lims=c(22,38))
+
+Invert refers to the colour palette direction. We set this to FALSE to
+change the direction from the normal (warm temperatures will then be a
+warm colour).
 
 The res value above sets the resolution of the colour mapping onto the
 continuous trait. A higher res will create a smoother gradient, but
@@ -225,19 +237,16 @@ values in the continuous trait.
 
 In this case objTb$cols has a length of 1001, so we need to create a
 colour palette that is that length by filling in values derived from the
-selected colour palette
+selected colour palette.
 
-    phylopalette<-ironbowpal
-
-    objTb<-contMap(tree.matched, Tb, plot=F, type="fan", invert=T, res=300,
-                   lims=c(22,38))
-
+    phylopalette<-ironbowpal 
     n<-length(objTb$cols)
     paln<-length(phylopalette)
     ind<-floor(seq(1, paln, paln/(n+floor(n/paln))))
     objTb$cols[1:n]<-phylopalette[ind]
 
-Then plot the Phylogram of Tb onto the Lizard Family phylogeny
+Then plot the Phylogram of Tb onto the Lizard Family phylogeny, either
+using a fan or a phylogram facing rightwards:
 
     plot(objTb, type="fan",  fsize=0.7, outline=F, leg.txt="Tb", offset=1,
          Vars=T)
@@ -253,4 +262,15 @@ Warning
 -------
 
 This field is not my area of expertise, so use the above example merely
-as an introduction.
+as an introduction to this topic. Feel free to make suggestions or
+improvements.
+
+Reference
+---------
+
+Data on Tb were obtained from Clusella-Trullas et al 2008:
+
+Clusella-Trullas, S., J. S. Terblanche, T. M. Blackburn, and S. L.
+Chown. 2008. Testing the thermal melanism hypothesis: A
+macrophysiological approach. Functional Ecology 22:232–238. doi:
+10.1111/j.1365-2435.2007.01377.x.
