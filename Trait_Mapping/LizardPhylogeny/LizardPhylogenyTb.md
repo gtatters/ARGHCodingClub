@@ -152,7 +152,7 @@ Load in trait data, and assign the family names (column 1) as row.names
 
 We have 56 taxa in the phylogeny, but only 34 data points in file for
 temperature data. Lepidosauria include lizards, snakes, tuatara, whereas
-the data file from Clusella-Trullas et al (2008) focused on lizard
+the data file from Clusella-Trullas and Chown (2014) focused on lizard
 families, but has multiple subtaxa within the Iguanidae, so the
 intersection of the two data sets will be smaller than 34, and we will
 lose data for these extra taxa.
@@ -268,9 +268,9 @@ improvements.
 Reference
 ---------
 
-Data on Tb were obtained from Clusella-Trullas et al 2008:
+Data on Tb were obtained from Clusella-Trullas and Chown, 2014:
 
-Clusella-Trullas, S., J. S. Terblanche, T. M. Blackburn, and S. L.
-Chown. 2008. Testing the thermal melanism hypothesis: A
-macrophysiological approach. Functional Ecology 22:232–238. doi:
-10.1111/j.1365-2435.2007.01377.x.
+CLUSELLA-TRULLAS, S. & CHOWN, S. L. (2014). Lizard thermal trait
+variation at multiple scales: a review. Journal of Comparative
+Physiology B-Biochemical Systemic and Environmental Physiology 184,
+5-21.
