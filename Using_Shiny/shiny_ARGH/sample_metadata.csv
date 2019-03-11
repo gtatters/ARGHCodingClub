@@ -1,0 +1,28 @@
+,Location,Bean,Fungi,Insect
+R-B1,Root,Bean,NF,NI
+R-B2,Root,Bean,NF,NI
+R-B3,Root,Bean,NF,NI
+R-BF-1,Root,Bean,Fungi,NI
+R-BF-2,Root,Bean,Fungi,NI
+R-BF-3,Root,Bean,Fungi,NI
+R-BFi-1,Root,Bean,Fungi,Insect
+R-BFi-2,Root,Bean,Fungi,Insect
+R-BFi-3,Root,Bean,Fungi,Insect
+R-Bi-1,Root,Bean,NF,Insect
+R-Bi-2,Root,Bean,NF,Insect
+R-Bi-3,Root,Bean,NF,Insect
+S-B1,Soil,Bean,NF,NI
+S-B2,Soil,Bean,NF,NI
+S-B3,Soil,Bean,NF,NI
+S-BF-1,Soil,Bean,Fungi,NI
+S-BF-2,Soil,Bean,Fungi,NI
+S-BF-3,Soil,Bean,Fungi,NI
+S-BFi-1,Soil,Bean,Fungi,Insect
+S-BFi-2,Soil,Bean,Fungi,Insect
+S-BFi-3,Soil,Bean,Fungi,Insect
+S-Bi-1,Soil,Bean,NF,Insect
+S-Bi-2,Soil,Bean,NF,Insect
+S-Bi-3,Soil,Bean,NF,Insect
+S1,Soil,No bean,NF,NI
+S2,Soil,No bean,NF,NI
+S3,Soil,No bean,NF,NI

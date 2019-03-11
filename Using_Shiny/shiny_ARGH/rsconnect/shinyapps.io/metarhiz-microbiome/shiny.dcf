@@ -1,0 +1,12 @@
+name: shiny
+title: shiny
+username:
+account: metarhiz-microbiome
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 356193
+bundleId: 1598090
+url: https://metarhiz-microbiome.shinyapps.io/shiny/
+when: 1537542866.32855
+asMultiple: FALSE
+asStatic: FALSE

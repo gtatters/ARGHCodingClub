@@ -19,8 +19,9 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Jan 14 - Tattersall: Mean + Error Plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Mean_Error_Dot_Plot)
 - [Jan 28 - Richards: Trait mapping code](https://github.com/gtatters/ARGHCodingClub//tree/master/Trait_Mapping)
 - Feb 11 - postponed due to scheduling conflict
-- [Feb 25 - Tattersall: Heat Maps from Weather Data (code to follow later)](https://github.com/gtatters/ARGHCodingClub//tree/master/Heat_Maps) 
-- Mar 11 - Waller: Code snippets, Shiny, Embedding images in plots, Sending jobs to R
+- [Feb 25 - Tattersall: Heat Maps from Weather Data](https://github.com/gtatters/ARGHCodingClub//tree/master/Heat_Maps) 
+- [Mar 11 - Waller: Embedding images in plots](https://github.com/gtatters/ARGHCodingClub//tree/master/EmbedImage)
+- [Mar 11 - Waller: Using Shiny](https://github.com/gtatters/ARGHCodingClub//tree/master/Using_Shiny)
 - Mar 25
 - Apr 8
 
