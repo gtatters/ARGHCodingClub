@@ -4,7 +4,7 @@ dat<-as.data.frame(replicate(50, rnorm(6)) )
 library(png)
 library(grid)
 library(scatterpie)
-#
+
 dir<-"/Users/alisonwaller/Documents/Professional/Brock/ADickson_Microbiome/"
 img <- readPNG( paste(dir,"aac_human_body.png",sep=""))
 g<-rasterGrob(img, width=unit(1,"npc"), height=unit(1,"npc"), interpolate = FALSE)
