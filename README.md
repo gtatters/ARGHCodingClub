@@ -22,8 +22,8 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Feb 25 - Tattersall: Heat Maps from Weather Data](https://github.com/gtatters/ARGHCodingClub//tree/master/Heat_Maps) 
 - [Mar 11 - Waller: Embedding images in plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Embed_Image)
 - [Mar 11 - Waller: Using Shiny](https://github.com/gtatters/ARGHCodingClub//tree/master/Using_Shiny)
-- Mar 25
-- Apr 8
+- Mar 25 - Network Analysis?  
+- Apr 8 - Volunteer / Requests?
 
 ## Content 
 
