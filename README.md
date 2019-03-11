@@ -23,7 +23,8 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Mar 11 - Waller: Embedding images in plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Embed_Image)
 - [Mar 11 - Waller: Using Shiny](https://github.com/gtatters/ARGHCodingClub//tree/master/Using_Shiny)
 - Mar 25 - Network Analysis?  
-- Apr 8 - Volunteer / Requests?
+- Apr 8 - Volunteer / Request for code help?
+- We should soon discuss summer schedule?
 
 ## Content 
 
