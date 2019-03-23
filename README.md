@@ -22,8 +22,8 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Feb 25 - Tattersall: Heat Maps from Weather Data](https://github.com/gtatters/ARGHCodingClub//tree/master/Heat_Maps) 
 - [Mar 11 - Waller: Embedding images in plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Embed_Image)
 - [Mar 11 - Waller: Using Shiny](https://github.com/gtatters/ARGHCodingClub//tree/master/Using_Shiny)
-- Mar 25 - Duff: Network Analysis 
-- Apr 8 - Tattersall: Use Knitr to share your code and results
+- [Mar 25 - Duff: Network Analysis](https://github.com/gtatters/ARGHCodingClub//tree/master/Network_Analysis) 
+- [Apr 8 - Tattersall: Using Knitr, Writing Functions, Randomisation](https://github.com/gtatters/ARGHCodingClub//tree/master/Knitr)
 - Apr 22 - Volunteer / Request for code help? Discuss summer schedule?
 
 
