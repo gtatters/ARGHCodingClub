@@ -23,7 +23,7 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Mar 11 - Waller: Embedding images in plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Embed_Image)
 - [Mar 11 - Waller: Using Shiny](https://github.com/gtatters/ARGHCodingClub//tree/master/Using_Shiny)
 - [Mar 25 - Duff: Network Analysis](https://github.com/gtatters/ARGHCodingClub//tree/master/Network_Analysis) 
-- [Apr 8 - Tattersall: Using Knitr, Writing Functions, Randomisation](https://github.com/gtatters/ARGHCodingClub//tree/master/Knitr)
+- [Apr 8 - Tattersall: Sharing Code with Knitr - Writing Functions &  Randomisation](https://github.com/gtatters/ARGHCodingClub//tree/master/Sharing_Code)
 - Apr 22 - Volunteer / Request for code help? Discuss summer schedule?
 
 
