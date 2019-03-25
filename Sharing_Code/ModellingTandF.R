@@ -47,6 +47,7 @@ p<-seq(0, 1, 0.0001)
 lines(density(qt(p, df=998)), xlim=c(-5,5),  ylim=c(0,0.4), col="red")
 # our empirical distribution overlaps with that determined from the t density formula
 
+plot(tstats)
 plot(sort(tstats))
 # out of 10000 randomly generated statistics, if you sort them, you can pull out
 # the ith percentile out of the 10000 available n

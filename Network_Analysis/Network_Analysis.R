@@ -47,6 +47,7 @@ raw.data <-
            stringsAsFactors = FALSE,
            header = TRUE,
            sep =",")
+str(raw.data)
 
 # Reading in node attributes data file.
 node_attributes <- 
@@ -54,10 +55,11 @@ node_attributes <-
            stringsAsFactors = FALSE,
            header = TRUE,
            sep =",")
+str(node_attributes)
 
 # Preparing and edgelist ----------------------------------------------------------
 
-# Creating an edgelist from raw numbers of chase-flee interactions between individual males
+# Creating an edgelist from raw numbers of call-text interactions between individuals
 edge_list <- raw.data %>%
   group_by(from = ID_1, to = ID_2, type = Behaviour) %>%
   summarise(edge.weight = n())
