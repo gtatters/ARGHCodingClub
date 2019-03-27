@@ -46,12 +46,16 @@ tcalc<-function(n=10){
 }
 
 tstats<-replicate(10000, tcalc(n=1000))
-hist(tstats, breaks=1000)
+hist(tstats, breaks=1000, xlim=c(-3,3))
 # Hmm....looks like t distribution data that also has noise attached to it.
 # Let's make use of the density function, which 
 plot(density(tstats), xlim=c(-5,5), ylim=c(0,0.4))
 p<-seq(0, 1, 0.0001)
 lines(density(qt(p, df=998)), xlim=c(-5,5),  ylim=c(0,0.4), col="red")
+lines(density(qt(p, df=98)), xlim=c(-5,5),  ylim=c(0,0.4), col="red")
+lines(density(qt(p, df=8)), xlim=c(-5,5),  ylim=c(0,0.4), col="red")
+lines(density(qt(p, df=3)), xlim=c(-5,5),  ylim=c(0,0.4), col="red")
+
 # our empirical distribution overlaps with that determined from the t density formula
 
 plot(tstats)
@@ -109,7 +113,7 @@ fcalc<-function(n1=2, n2=20){
       f<-data.frame(anova(lm(Response ~ Group, z)))[1,4]
       return(f)
     }
-
+fcalc()
 # Look at F distribution:
 n1=20
 n2=20
