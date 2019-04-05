@@ -24,7 +24,9 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Mar 11 - Waller: Using Shiny](https://github.com/gtatters/ARGHCodingClub//tree/master/Using_Shiny)
 - [Mar 25 - Tattersall: Sharing Code with Knitr - Writing Functions &  Randomisation](https://github.com/gtatters/ARGHCodingClub//tree/master/Sharing_Code)
 - [Apr 8 - Duff: Network Analysis](https://github.com/gtatters/ARGHCodingClub//tree/master/Network_Analysis) 
-- Apr 22 - Volunteer / Request for code help? Discuss summer schedule?
+- [Apr 22 - Tattersall: Reporting on linear models](https://github.com/gtatters/ARGHCodingClub//tree/master/Linear_Model_Reporting) 
+
+- Spring/Summer schedule: Volunteer / Request for code help?  This can't only be the Tattersall R show
 
 
 ## Content 
