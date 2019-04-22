@@ -1,0 +1,3142 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={LinearModelReporting.R},
+            pdfauthor={GlennTattersall},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{LinearModelReporting.R}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{GlennTattersall}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-04-21}
+
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Summary of Regression / Linear Models as HTML Table}
+
+\CommentTok{# Source: https://strengejacke.github.io/sjPlot/articles/tab_model_estimates.html#a-simple-html-table-from-regression-results}
+
+\CommentTok{# tab_model() is the pendant to plot_model(), however, instead of creating }
+\CommentTok{# plots, tab_model() creates HTML-tables that will be displayed either in your }
+\CommentTok{# IDE’s viewer-pane, in a web browser or in a knitr-markdown-document }
+ 
+\CommentTok{# HTML is the only output-format, you can’t (directly) create a LaTex or PDF }
+\CommentTok{# output from tab_model() and related table-functions. However, it is possible}
+\CommentTok{# to easily export the tables into Microsoft Word or Libre Office Writer.}
+
+\CommentTok{# This vignette shows how to create table from regression models with tab_model(). }
+ 
+\CommentTok{# Note! Due to the custom CSS, the layout of the table inside a}
+\CommentTok{# knitr-document differs from the output in the viewer-pane and web browser!}
+   
+\CommentTok{# Install packages in this order:}
+\CommentTok{# sjlabelled → sjmisc → sjstats → ggeffects → sjPlot}
+
+
+\CommentTok{# load packages}
+\KeywordTok{library}\NormalTok{(sjPlot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## #refugeeswelcome
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sjmisc)}
+\KeywordTok{library}\NormalTok{(sjlabelled)}
+
+\NormalTok{## sample data}
+\KeywordTok{data}\NormalTok{(efc)}
+\NormalTok{efc <-}\StringTok{ }\KeywordTok{as_factor}\NormalTok{(efc, c161sex, c172code)}
+
+\CommentTok{# A simple HTML table from regression results}
+\CommentTok{# First, we fit two linear models to demonstrate the tab_model()-function.}
+ 
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(barthtot }\OperatorTok{~}\StringTok{ }\NormalTok{c160age }\OperatorTok{+}\StringTok{ }\NormalTok{c12hour }\OperatorTok{+}\StringTok{ }\NormalTok{c161sex }\OperatorTok{+}\StringTok{ }\NormalTok{c172code, }\DataTypeTok{data =}\NormalTok{ efc)}
+\NormalTok{m2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(neg_c_}\DecValTok{7} \OperatorTok{~}\StringTok{ }\NormalTok{c160age }\OperatorTok{+}\StringTok{ }\NormalTok{c12hour }\OperatorTok{+}\StringTok{ }\NormalTok{c161sex }\OperatorTok{+}\StringTok{ }\NormalTok{e17age, }\DataTypeTok{data =}\NormalTok{ efc)}
+
+\CommentTok{# The simplest way of producing the table output is by passing the fitted model}
+\CommentTok{# as parameter. By default, estimates, confidence intervals (CI) and p-values }
+\CommentTok{# (p) are reported. As summary, the numbers of observations as well as the }
+\CommentTok{# R-squared values are shown.}
+
+\KeywordTok{summary}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = barthtot ~ c160age + c12hour + c161sex + c172code, 
+##     data = efc)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -75.144 -14.944   4.401  18.661  72.393 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 87.14994    4.68009  18.621  < 2e-16 ***
+## c160age     -0.20716    0.07211  -2.873  0.00418 ** 
+## c12hour     -0.27883    0.01865 -14.950  < 2e-16 ***
+## c161sex2    -0.39402    2.08893  -0.189  0.85044    
+## c172code2    1.36596    2.28440   0.598  0.55004    
+## c172code3   -1.64045    2.84037  -0.578  0.56373    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 25.35 on 815 degrees of freedom
+##   (87 observations deleted due to missingness)
+## Multiple R-squared:  0.2708, Adjusted R-squared:  0.2664 
+## F-statistic: 60.54 on 5 and 815 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# compare summary to tab_model:}
+\KeywordTok{tab_model}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+carer'age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+average number of hoursof care per week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+Female
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+intermediate level ofeducation
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+high level of education
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Automatic labelling}
+\KeywordTok{colnames}\NormalTok{(efc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "c12hour"  "e15relat" "e16sex"   "e17age"   "e42dep"   "c82cop1" 
+##  [7] "c83cop2"  "c84cop3"  "c85cop4"  "c86cop5"  "c87cop6"  "c88cop7" 
+## [13] "c89cop8"  "c90cop9"  "c160age"  "c161sex"  "c172code" "c175empl"
+## [19] "barthtot" "neg_c_7"  "pos_v_4"  "quol_5"   "resttotn" "tot_sc_e"
+## [25] "n4pstu"   "nur_pst"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# columns look like quite unremarkable features, but look closely:}
+\KeywordTok{str}\NormalTok{(efc}\OperatorTok{$}\NormalTok{c160age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  num [1:908] 56 54 80 69 47 56 61 67 59 49 ...
+##  - attr(*, "label")= chr "carer' age"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(efc}\OperatorTok{$}\NormalTok{c12hour)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  num [1:908] 16 148 70 168 168 16 161 110 28 40 ...
+##  - attr(*, "label")= chr "average number of hours of care per week"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# As the sjPlot-packages features labelled data, the coefficients in the table}
+\CommentTok{# are already labelled in this example. The name of the dependent variable(s) }
+\CommentTok{# is used as main column header for each model. For non-labelled data, the }
+\CommentTok{# coefficient names are shown.}
+ 
+
+\CommentTok{# Turn off automatic labelling}
+\CommentTok{# To turn off automatic labelling, use auto.label = FALSE, or provide an empty}
+\CommentTok{# character vector for pred.labels and dv.labels.}
+
+\KeywordTok{tab_model}\NormalTok{(m1, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+c12hour
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+c172code2
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+c172code3
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# some categorical data are already sufficient}
+\KeywordTok{data}\NormalTok{(mtcars)}
+\NormalTok{m.mtcars <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{cyl }\OperatorTok{+}\StringTok{ }\NormalTok{hp }\OperatorTok{+}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ mtcars)}
+\KeywordTok{tab_model}\NormalTok{(m.mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+mpg
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+38.75
+
+35.25~--~42.25
+
+\textless{}0.001
+
+cyl
+
+-0.94
+
+-2.02~--~0.14
+
+0.098
+
+hp
+
+-0.02
+
+-0.04~--~0.01
+
+0.140
+
+wt
+
+-3.17
+
+-4.62~--~-1.72
+
+\textless{}0.001
+
+Observations
+
+32
+
+R2 / adjusted R2
+
+0.843 / 0.826
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# but maybe you want to add details, you can do so manually. Note you need to }
+\CommentTok{# specify the intercept predictor as well in a linear model:}
+\KeywordTok{tab_model}\NormalTok{(m.mtcars,  }
+          \DataTypeTok{pred.labels=}\KeywordTok{c}\NormalTok{(}\StringTok{"(Intercept)"}\NormalTok{, }\StringTok{"Cylinders"}\NormalTok{, }\StringTok{"Horse Power"}\NormalTok{, }\StringTok{"Weight"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+mpg
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+38.75
+
+35.25~--~42.25
+
+\textless{}0.001
+
+Cylinders
+
+-0.94
+
+-2.02~--~0.14
+
+0.098
+
+Horse Power
+
+-0.02
+
+-0.04~--~0.01
+
+0.140
+
+Weight
+
+-3.17
+
+-4.62~--~-1.72
+
+\textless{}0.001
+
+Observations
+
+32
+
+R2 / adjusted R2
+
+0.843 / 0.826
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# What to do about model intercept?}
+\CommentTok{# You can forcibly remove the intercept, at which point, the intercept effect}
+\CommentTok{# simply becomes encapsulated into one of the main categorical variables.}
+\NormalTok{m1.}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(barthtot }\OperatorTok{~}\StringTok{ }\NormalTok{c160age }\OperatorTok{+}\StringTok{ }\NormalTok{c12hour }\OperatorTok{+}\StringTok{ }\NormalTok{c161sex }\OperatorTok{+}\StringTok{ }\NormalTok{c172code }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ efc)}
+\KeywordTok{tab_model}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+carer'age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+average number of hoursof care per week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+Female
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+intermediate level ofeducation
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+high level of education
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tab_model}\NormalTok{(m1.}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+carer'age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+average number of hoursof care per week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+Male
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+Female
+
+86.76
+
+78.00~--~95.51
+
+\textless{}0.001
+
+intermediate level ofeducation
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+high level of education
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.874 / 0.873
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# More than one model}
+\CommentTok{# tab_model() can print multiple models at once, which are then printed }
+\CommentTok{# side-by-side. Identical predictor coefficients are matched in a row.}
+\KeywordTok{tab_model}\NormalTok{(m1, m2)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Negative impact with 7items
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+9.83
+
+7.34~--~12.33
+
+\textless{}0.001
+
+carer'age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+0.01
+
+-0.01~--~0.03
+
+0.359
+
+average number of hoursof care per week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+0.02
+
+0.01~--~0.02
+
+\textless{}0.001
+
+Female
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+0.43
+
+-0.15~--~1.01
+
+0.147
+
+intermediate level ofeducation
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+high level of education
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+elder'age
+
+0.01
+
+-0.03~--~0.04
+
+0.741
+
+Observations
+
+821
+
+879
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.067 / 0.063
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Generalized linear models}
+\CommentTok{# For generalized linear models, the ouput is slightly adapted. }
+\CommentTok{# Instead of Estimates, the column is named Odds Ratios, Incidence Rate Ratios}
+\CommentTok{# etc., depending on the model. }
+\CommentTok{# The coefficients are, by default, automatically}
+\CommentTok{# converted (exponentiated). Furthermore, pseudo R-squared statistics are }
+\CommentTok{# shown in the summary.}
+
+\NormalTok{m3 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{   tot_sc_e }\OperatorTok{~}\StringTok{ }\NormalTok{c160age }\OperatorTok{+}\StringTok{ }\NormalTok{c12hour }\OperatorTok{+}\StringTok{ }\NormalTok{c161sex }\OperatorTok{+}\StringTok{ }\NormalTok{c172code, }
+   \DataTypeTok{data =}\NormalTok{ efc, }\DataTypeTok{family =} \KeywordTok{poisson}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{efc}\OperatorTok{$}\NormalTok{neg_c_7d <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(efc}\OperatorTok{$}\NormalTok{neg_c_}\DecValTok{7} \OperatorTok{<}\StringTok{ }\KeywordTok{median}\NormalTok{(efc}\OperatorTok{$}\NormalTok{neg_c_}\DecValTok{7}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+
+\NormalTok{m4 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{ neg_c_7d }\OperatorTok{~}\StringTok{ }\NormalTok{c161sex }\OperatorTok{+}\StringTok{ }\NormalTok{barthtot }\OperatorTok{+}\StringTok{ }\NormalTok{c172code,}
+   \DataTypeTok{data =}\NormalTok{ efc, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{"logit"}\NormalTok{)}
+\NormalTok{)}
+ 
+\KeywordTok{tab_model}\NormalTok{(m3, m4)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Services for elderly
+
+neg c 7 d
+
+Predictors
+
+Incidence Rate Ratios
+
+CI
+
+p
+
+Odds Ratios
+
+CI
+
+p
+
+(Intercept)
+
+0.30
+
+0.21~--~0.45
+
+\textless{}0.001
+
+6.54
+
+3.62~--~11.81
+
+\textless{}0.001
+
+carer'age
+
+1.01
+
+1.01~--~1.02
+
+\textless{}0.001
+
+average number of hoursof care per week
+
+1.00
+
+1.00~--~1.00
+
+\textless{}0.001
+
+Female
+
+1.01
+
+0.86~--~1.19
+
+0.867
+
+1.87
+
+1.30~--~2.68
+
+0.001
+
+intermediate level ofeducation
+
+1.47
+
+1.21~--~1.78
+
+\textless{}0.001
+
+1.23
+
+0.84~--~1.82
+
+0.288
+
+high level of education
+
+1.90
+
+1.52~--~2.37
+
+\textless{}0.001
+
+1.37
+
+0.84~--~2.23
+
+0.204
+
+Total score BARTHEL INDEX
+
+0.97
+
+0.96~--~0.97
+
+\textless{}0.001
+
+Observations
+
+840
+
+815
+
+Cox \& Snell's R2 / Nagelkerke's R2
+
+0.083 / 0.106
+
+0.184 / 0.247
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Untransformed estimates on the linear scale}
+\CommentTok{# To plot the estimates on the linear scale, use transform = NULL.}
+\KeywordTok{tab_model}\NormalTok{(m3, m4, }\DataTypeTok{transform =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{auto.label =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Services for elderly
+
+neg c 7 d
+
+Predictors
+
+Log-Mean
+
+CI
+
+p
+
+Log-Odds
+
+CI
+
+p
+
+(Intercept)
+
+-1.19
+
+-1.58~--~-0.80
+
+\textless{}0.001
+
+1.88
+
+1.29~--~2.47
+
+\textless{}0.001
+
+carer'age
+
+0.01
+
+0.01~--~0.02
+
+\textless{}0.001
+
+average number of hoursof care per week
+
+0.00
+
+0.00~--~0.00
+
+\textless{}0.001
+
+Female
+
+0.01
+
+-0.15~--~0.17
+
+0.867
+
+0.63
+
+0.26~--~0.99
+
+0.001
+
+intermediate level ofeducation
+
+0.39
+
+0.19~--~0.58
+
+\textless{}0.001
+
+0.21
+
+-0.18~--~0.60
+
+0.288
+
+high level of education
+
+0.64
+
+0.42~--~0.86
+
+\textless{}0.001
+
+0.31
+
+-0.17~--~0.80
+
+0.204
+
+Total score BARTHEL INDEX
+
+-0.03
+
+-0.04~--~-0.03
+
+\textless{}0.001
+
+Observations
+
+840
+
+815
+
+Cox \& Snell's R2 / Nagelkerke's R2
+
+0.083 / 0.106
+
+0.184 / 0.247
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# More complex models}
+\CommentTok{# Other models, like hurdle- or zero-inflated models, also work with tab_model().}
+\CommentTok{# In this case, the zero inflation model is indicated in the table.}
+\CommentTok{# Use show.zeroinf = FALSE to hide this part from the table.}
+
+\KeywordTok{library}\NormalTok{(pscl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes and Methods for R developed in the
+## Political Science Computational Laboratory
+## Department of Political Science
+## Stanford University
+## Simon Jackman
+## hurdle and zeroinfl functions by Achim Zeileis
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(bioChemists)}
+
+\NormalTok{m5 <-}\StringTok{ }\KeywordTok{zeroinfl}\NormalTok{(art }\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{|}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ bioChemists)}
+\KeywordTok{tab_model}\NormalTok{(m5)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Dependent variable
+
+Predictors
+
+Incidence Rate Ratios
+
+CI
+
+p
+
+(Intercept)
+
+1.90
+
+1.50~--~2.41
+
+\textless{}0.001
+
+femWomen
+
+0.81
+
+0.72~--~0.92
+
+0.001
+
+marMarried
+
+1.11
+
+0.97~--~1.28
+
+0.145
+
+kid5
+
+0.87
+
+0.79~--~0.95
+
+0.003
+
+phd
+
+0.99
+
+0.94~--~1.06
+
+0.842
+
+ment
+
+1.02
+
+1.01~--~1.02
+
+\textless{}0.001
+
+Zero-Inflated Model
+
+(Intercept)
+
+0.56
+
+0.21~--~1.52
+
+0.257
+
+femWomen
+
+1.12
+
+0.64~--~1.93
+
+0.695
+
+marMarried
+
+0.70
+
+0.38~--~1.31
+
+0.265
+
+kid5
+
+1.24
+
+0.85~--~1.83
+
+0.269
+
+phd
+
+1.00
+
+0.75~--~1.33
+
+0.993
+
+ment
+
+0.87
+
+0.80~--~0.96
+
+0.003
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tab_model}\NormalTok{(m5, }\DataTypeTok{show.zeroinf =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Dependent variable
+
+Predictors
+
+Incidence Rate Ratios
+
+CI
+
+p
+
+(Intercept)
+
+1.90
+
+1.50~--~2.41
+
+\textless{}0.001
+
+femWomen
+
+0.81
+
+0.72~--~0.92
+
+0.001
+
+marMarried
+
+1.11
+
+0.97~--~1.28
+
+0.145
+
+kid5
+
+0.87
+
+0.79~--~0.95
+
+0.003
+
+phd
+
+0.99
+
+0.94~--~1.06
+
+0.842
+
+ment
+
+1.02
+
+1.01~--~1.02
+
+\textless{}0.001
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# You can combine any model in one table.}
+
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+Incidence Rate Ratios
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+0.30
+
+0.21~--~0.45
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+1.01
+
+1.01~--~1.02
+
+\textless{}0.001
+
+c12hour
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+1.00
+
+1.00~--~1.00
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+1.01
+
+0.86~--~1.19
+
+0.867
+
+c172code2
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+1.47
+
+1.21~--~1.78
+
+\textless{}0.001
+
+c172code3
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+1.90
+
+1.52~--~2.37
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Show or hide further columns}
+\CommentTok{# tab_model() has some argument that allow to show or hide specific columns }
+\CommentTok{# from the output:}
+
+\CommentTok{# show.est to show/hide the column with model estimates.}
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{,  }\DataTypeTok{show.est=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+p
+
+p
+
+(Intercept)
+
+\textless{}0.001
+
+\textless{}0.001
+
+c160age
+
+0.004
+
+\textless{}0.001
+
+c12hour
+
+\textless{}0.001
+
+\textless{}0.001
+
+c161sex2
+
+0.850
+
+0.867
+
+c172code2
+
+0.550
+
+\textless{}0.001
+
+c172code3
+
+0.564
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show.ci to show/hide the column with confidence intervals.}
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.ci=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+p
+
+Incidence Rate Ratios
+
+p
+
+(Intercept)
+
+87.15
+
+\textless{}0.001
+
+0.30
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+0.004
+
+1.01
+
+\textless{}0.001
+
+c12hour
+
+-0.28
+
+\textless{}0.001
+
+1.00
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+0.850
+
+1.01
+
+0.867
+
+c172code2
+
+1.37
+
+0.550
+
+1.47
+
+\textless{}0.001
+
+c172code3
+
+-1.64
+
+0.564
+
+1.90
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show.se to show/hide the column with standard errors.}
+\KeywordTok{tab_model}\NormalTok{(m1, m3,  }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.se=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+Incidence Rate Ratios
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+0.30
+
+0.21~--~0.45
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+1.01
+
+1.01~--~1.02
+
+\textless{}0.001
+
+c12hour
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+1.00
+
+1.00~--~1.00
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+1.01
+
+0.86~--~1.19
+
+0.867
+
+c172code2
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+1.47
+
+1.21~--~1.78
+
+\textless{}0.001
+
+c172code3
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+1.90
+
+1.52~--~2.37
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show.std to show/hide the column with standardized estimates }
+\CommentTok{# (and their standard errors).}
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.std=}\NormalTok{T, }\DataTypeTok{show.ci=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+std. Beta
+
+p
+
+Incidence Rate Ratios
+
+p
+
+(Intercept)
+
+87.15
+
+\textless{}0.001
+
+0.30
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+-0.09
+
+0.004
+
+1.01
+
+\textless{}0.001
+
+c12hour
+
+-0.28
+
+-0.48
+
+\textless{}0.001
+
+1.00
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+-0.01
+
+0.850
+
+1.01
+
+0.867
+
+c172code2
+
+1.37
+
+0.02
+
+0.550
+
+1.47
+
+\textless{}0.001
+
+c172code3
+
+-1.64
+
+-0.02
+
+0.564
+
+1.90
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show.p to show/hide the column with p-values.}
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.p=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.ci=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+Incidence Rate Ratios
+
+(Intercept)
+
+87.15
+
+0.30
+
+c160age
+
+-0.21
+
+1.01
+
+c12hour
+
+-0.28
+
+1.00
+
+c161sex2
+
+-0.39
+
+1.01
+
+c172code2
+
+1.37
+
+1.47
+
+c172code3
+
+-1.64
+
+1.90
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show.stat to show/hide the column with the coefficients' test statistics.}
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.stat=}\NormalTok{T, }\DataTypeTok{show.ci=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+Statistic
+
+p
+
+Incidence Rate Ratios
+
+Statistic
+
+p
+
+(Intercept)
+
+87.15
+
+18.62
+
+\textless{}0.001
+
+0.30
+
+-5.97
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+-2.87
+
+0.004
+
+1.01
+
+4.41
+
+\textless{}0.001
+
+c12hour
+
+-0.28
+
+-14.95
+
+\textless{}0.001
+
+1.00
+
+3.72
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+-0.19
+
+0.850
+
+1.01
+
+0.17
+
+0.867
+
+c172code2
+
+1.37
+
+0.60
+
+0.550
+
+1.47
+
+3.89
+
+\textless{}0.001
+
+c172code3
+
+-1.64
+
+-0.58
+
+0.564
+
+1.90
+
+5.65
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tab_model}\NormalTok{(m1, m3, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.stat=}\NormalTok{F, }\DataTypeTok{show.ci=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+barthtot
+
+tot\_sc\_e
+
+Predictors
+
+Estimates
+
+p
+
+Incidence Rate Ratios
+
+p
+
+(Intercept)
+
+87.15
+
+\textless{}0.001
+
+0.30
+
+\textless{}0.001
+
+c160age
+
+-0.21
+
+0.004
+
+1.01
+
+\textless{}0.001
+
+c12hour
+
+-0.28
+
+\textless{}0.001
+
+1.00
+
+\textless{}0.001
+
+c161sex2
+
+-0.39
+
+0.850
+
+1.01
+
+0.867
+
+c172code2
+
+1.37
+
+0.550
+
+1.47
+
+\textless{}0.001
+
+c172code3
+
+-1.64
+
+0.564
+
+1.90
+
+\textless{}0.001
+
+Observations
+
+821
+
+840
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.083 / 0.106
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show.df for linear mixed models, when p-values are based on degrees of}
+\CommentTok{# freedom with Kenward-Rogers approximation, these degrees of freedom are shown.}
+\CommentTok{# p.val needs to be set to "kr"}
+
+\KeywordTok{library}\NormalTok{(lme4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(sleepstudy)}
+\KeywordTok{str}\NormalTok{(sleepstudy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    180 obs. of  3 variables:
+##  $ Reaction: num  250 259 251 321 357 ...
+##  $ Days    : num  0 1 2 3 4 5 6 7 8 9 ...
+##  $ Subject : Factor w/ 18 levels "308","309","310",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{me1<-}\KeywordTok{lmer}\NormalTok{(Reaction }\OperatorTok{~}\StringTok{ }\NormalTok{Days }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{Subject), }\DataTypeTok{data=}\NormalTok{sleepstudy)}
+\KeywordTok{tab_model}\NormalTok{(me1, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.stat=}\NormalTok{T, }\DataTypeTok{show.se=}\NormalTok{T, }\DataTypeTok{show.df=}\NormalTok{T, }
+          \DataTypeTok{p.val=}\StringTok{"kr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Reaction
+
+Predictors
+
+Estimates
+
+std. Error
+
+CI
+
+Statistic
+
+p
+
+df
+
+(Intercept)
+
+251.41
+
+9.75
+
+232.30~--~270.51
+
+25.79
+
+\textless{}0.001
+
+23.00
+
+Days
+
+10.47
+
+0.80
+
+8.89~--~12.04
+
+13.02
+
+\textless{}0.001
+
+161.00
+
+Random Effects
+
+σ2
+
+960.46
+
+τ00 Subject
+
+1378.18
+
+ICC Subject
+
+0.59
+
+Observations
+
+180
+
+Marginal R2 / Conditional R2
+
+0.280 / 0.704
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Adding columns}
+\CommentTok{# In the following example, standard errors, standardized coefficients }
+\CommentTok{# and test statistics are also shown.}
+
+\KeywordTok{tab_model}\NormalTok{(m1, }\DataTypeTok{show.se =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{show.std =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{show.stat =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+std. Error
+
+std. Beta
+
+standardized std. Error
+
+CI
+
+standardized CI
+
+Statistic
+
+p
+
+(Intercept)
+
+87.15
+
+4.68
+
+77.98~--~96.32
+
+18.62
+
+\textless{}0.001
+
+carer'age
+
+-0.21
+
+0.07
+
+-0.09
+
+0.03
+
+-0.35~--~-0.07
+
+-0.16~--~-0.03
+
+-2.87
+
+0.004
+
+average number of hoursof care per week
+
+-0.28
+
+0.02
+
+-0.48
+
+0.03
+
+-0.32~--~-0.24
+
+-0.54~--~-0.42
+
+-14.95
+
+\textless{}0.001
+
+Female
+
+-0.39
+
+2.09
+
+-0.01
+
+0.03
+
+-4.49~--~3.70
+
+-0.06~--~0.05
+
+-0.19
+
+0.850
+
+intermediate level ofeducation
+
+1.37
+
+2.28
+
+0.02
+
+0.04
+
+-3.11~--~5.84
+
+-0.05~--~0.10
+
+0.60
+
+0.550
+
+high level of education
+
+-1.64
+
+2.84
+
+-0.02
+
+0.04
+
+-7.21~--~3.93
+
+-0.09~--~0.05
+
+-0.58
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Removing columns}
+\CommentTok{# In the following example, default columns are removed.}
+
+\KeywordTok{tab_model}\NormalTok{(m3, m4, }\DataTypeTok{show.ci =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{show.p =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{auto.label =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+tot\_sc\_e
+
+neg\_c\_7d
+
+Predictors
+
+Incidence Rate Ratios
+
+Odds Ratios
+
+(Intercept)
+
+0.30
+
+6.54
+
+c160age
+
+1.01
+
+c12hour
+
+1.00
+
+c161sex2
+
+1.01
+
+1.87
+
+c172code2
+
+1.47
+
+1.23
+
+c172code3
+
+1.90
+
+1.37
+
+barthtot
+
+0.97
+
+Observations
+
+840
+
+815
+
+Cox \& Snell's R2 / Nagelkerke's R2
+
+0.083 / 0.106
+
+0.184 / 0.247
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Removing and sorting columns}
+\CommentTok{# Another way to remove columns, which also allows to reorder the columns, }
+\CommentTok{# is the col.order-argument. This is a character vector, where each element}
+\CommentTok{# indicates a column in the output. The value "est", for instance, }
+\CommentTok{# indicates the estimates, while "std.est" is the column for standardized}
+\CommentTok{# estimates and so on.}
+\CommentTok{# }
+\CommentTok{# By default, col.order contains all possible columns. All columns that}
+\CommentTok{# should shown (see previous tables, for example using show.se = TRUE to }
+\CommentTok{# show standard errors, or show.st = TRUE to show standardized estimates) are }
+\CommentTok{# then printed by default. Colums that are excluded from col.order are not }
+\CommentTok{# shown, no matter if the show*-arguments are TRUE or FALSE. }
+\CommentTok{# So if show.se = TRUE, but col.order does not contain the element "se", }
+\CommentTok{# standard errors are not shown. On the other hand, if show.est = FALSE,}
+\CommentTok{# but col.order does include the element "est", the columns with estimates }
+\CommentTok{# are not shown.}
+\CommentTok{# }
+\CommentTok{# In summary, col.order can be used to exclude columns from the table and }
+\CommentTok{# to change the order of colums.}
+\CommentTok{#}
+\KeywordTok{tab_model}\NormalTok{(}
+\NormalTok{  m1, }\DataTypeTok{show.se =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{show.std =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{show.stat =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{col.order =} \KeywordTok{c}\NormalTok{(}\StringTok{"p"}\NormalTok{, }\StringTok{"stat"}\NormalTok{, }\StringTok{"est"}\NormalTok{, }\StringTok{"std.se"}\NormalTok{, }\StringTok{"se"}\NormalTok{, }\StringTok{"std.est"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+p
+
+Statistic
+
+Estimates
+
+standardized std. Error
+
+std. Error
+
+std. Beta
+
+(Intercept)
+
+\textless{}0.001
+
+18.62
+
+87.15
+
+4.68
+
+carer'age
+
+0.004
+
+-2.87
+
+-0.21
+
+0.03
+
+0.07
+
+-0.09
+
+average number of hoursof care per week
+
+\textless{}0.001
+
+-14.95
+
+-0.28
+
+0.03
+
+0.02
+
+-0.48
+
+Female
+
+0.850
+
+-0.19
+
+-0.39
+
+0.03
+
+2.09
+
+-0.01
+
+intermediate level ofeducation
+
+0.550
+
+0.60
+
+1.37
+
+0.04
+
+2.28
+
+0.02
+
+high level of education
+
+0.564
+
+-0.58
+
+-1.64
+
+0.04
+
+2.84
+
+-0.02
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Collapsing columns}
+\CommentTok{# With collapse.ci and collapse.se, the columns for confidence intervals }
+\CommentTok{# and standard errors can be collapsed into one column together with the}
+\CommentTok{# estimates. Sometimes this table layout is required.}
+
+\KeywordTok{tab_model}\NormalTok{(m1, }\DataTypeTok{collapse.ci =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+p
+
+(Intercept)
+
+87.15(77.98~--~96.32)
+
+\textless{}0.001
+
+carer'age
+
+-0.21(-0.35~--~-0.07)
+
+0.004
+
+average number of hoursof care per week
+
+-0.28(-0.32~--~-0.24)
+
+\textless{}0.001
+
+Female
+
+-0.39(-4.49~--~3.70)
+
+0.850
+
+intermediate level ofeducation
+
+1.37(-3.11~--~5.84)
+
+0.550
+
+high level of education
+
+-1.64(-7.21~--~3.93)
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Defining own labels}
+\CommentTok{# There are different options to change the labels of the column headers}
+\CommentTok{# or coefficients, e.g. with:}
+
+\CommentTok{# pred.labels to change the names of the coefficients in the Predictors column. }
+\CommentTok{# Note that the length of pred.labels must exactly match the amount of predictors }
+\CommentTok{# in the Predictor column.}
+\CommentTok{# dv.labels to change the names of the model columns, which are labelled with }
+\CommentTok{# the variable labels / names from the dependent variables.}
+\CommentTok{# Furthermore, there are various string.*-arguments, to change the name of }
+\CommentTok{# column headings.}
+
+\KeywordTok{tab_model}\NormalTok{(}
+\NormalTok{  m1, m2, }
+  \DataTypeTok{pred.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Intercept"}\NormalTok{, }\StringTok{"Age (Carer)"}\NormalTok{, }\StringTok{"Hours per Week"}\NormalTok{, }\StringTok{"Gender (Carer)"}\NormalTok{,}
+                  \StringTok{"Education: middle (Carer)"}\NormalTok{, }\StringTok{"Education: high (Carer)"}\NormalTok{, }
+                  \StringTok{"Age (Older Person)"}\NormalTok{),}
+  \DataTypeTok{dv.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"First Model"}\NormalTok{, }\StringTok{"M2"}\NormalTok{),}
+  \DataTypeTok{string.pred =} \StringTok{"Coefficient"}\NormalTok{,}
+  \DataTypeTok{string.ci =} \StringTok{"Conf. Int (95%)"}\NormalTok{,}
+  \DataTypeTok{string.p =} \StringTok{"P-Value"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+First Model
+
+M2
+
+Coefficient
+
+Estimates
+
+Conf. Int (95\%)
+
+P-Value
+
+Estimates
+
+Conf. Int (95\%)
+
+P-Value
+
+Intercept
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+9.83
+
+7.34~--~12.33
+
+\textless{}0.001
+
+Age (Carer)
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+0.01
+
+-0.01~--~0.03
+
+0.359
+
+Hours per Week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+0.02
+
+0.01~--~0.02
+
+\textless{}0.001
+
+Gender (Carer)
+
+-0.39
+
+-4.49~--~3.70
+
+0.850
+
+0.43
+
+-0.15~--~1.01
+
+0.147
+
+Education: middle (Carer)
+
+1.37
+
+-3.11~--~5.84
+
+0.550
+
+Education: high (Carer)
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+Age (Older Person)
+
+0.01
+
+-0.03~--~0.04
+
+0.741
+
+Observations
+
+821
+
+879
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.067 / 0.063
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# I don't think there is a way to change the title of the "Estimates" column?}
+
+\CommentTok{# First Model   M2}
+\CommentTok{# Show asterisks instead of numeric p-values}
+\CommentTok{# You can change the style of how p-values are displayed with the argument}
+\CommentTok{# p.style. With p.style = "asterisk", the p-values are indicated as * in }
+\CommentTok{# the table.}
+
+\KeywordTok{tab_model}\NormalTok{(m1, m2, }\DataTypeTok{p.style =} \StringTok{"a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Negative impact with 7items
+
+Predictors
+
+Estimates
+
+CI
+
+Estimates
+
+CI
+
+(Intercept)
+
+87.15 ***
+
+77.98~--~96.32
+
+9.83 ***
+
+7.34~--~12.33
+
+carer'age
+
+-0.21 **
+
+-0.35~--~-0.07
+
+0.01
+
+-0.01~--~0.03
+
+average number of hoursof care per week
+
+-0.28 ***
+
+-0.32~--~-0.24
+
+0.02 ***
+
+0.01~--~0.02
+
+Female
+
+-0.39
+
+-4.49~--~3.70
+
+0.43
+
+-0.15~--~1.01
+
+intermediate level ofeducation
+
+1.37
+
+-3.11~--~5.84
+
+high level of education
+
+-1.64
+
+-7.21~--~3.93
+
+elder'age
+
+0.01
+
+-0.03~--~0.04
+
+Observations
+
+821
+
+879
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.067 / 0.063
+
+\begin{itemize}
+\tightlist
+\item
+  p\textless{}0.05~~~** p\textless{}0.01~~~*** p\textless{}0.001
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Note: I personally find this annoying as it does not show p values at all but}
+\CommentTok{# gives an impression of importance that may not be warranted.  I.e. when }
+\CommentTok{# do you normally care about the significance of the intercept term?  Or does}
+\CommentTok{# your field really care about p values, so why use *** to inflate or guide}
+\CommentTok{# the reader toward emphasising something that they should discern themselves.}
+
+\CommentTok{# Automatic matching for named vectors}
+\CommentTok{# Another way to easily assign labels are named vectors. In this case,}
+\CommentTok{# it doesn't matter if pred.labels has more labels than coefficients in the }
+\CommentTok{# model(s), or in which order the labels are passed to tab_model(). The only}
+\CommentTok{# requirement is that the labels' names equal the coefficients names as they}
+\CommentTok{# appear in the summary()-output.}
+
+\CommentTok{# example, coefficients are "c161sex2" or "c172code3"}
+\KeywordTok{summary}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = barthtot ~ c160age + c12hour + c161sex + c172code, 
+##     data = efc)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -75.144 -14.944   4.401  18.661  72.393 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 87.14994    4.68009  18.621  < 2e-16 ***
+## c160age     -0.20716    0.07211  -2.873  0.00418 ** 
+## c12hour     -0.27883    0.01865 -14.950  < 2e-16 ***
+## c161sex2    -0.39402    2.08893  -0.189  0.85044    
+## c172code2    1.36596    2.28440   0.598  0.55004    
+## c172code3   -1.64045    2.84037  -0.578  0.56373    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 25.35 on 815 degrees of freedom
+##   (87 observations deleted due to missingness)
+## Multiple R-squared:  0.2708, Adjusted R-squared:  0.2664 
+## F-statistic: 60.54 on 5 and 815 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create a named vector, pl:}
+\NormalTok{pl <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \StringTok{`}\DataTypeTok{(Intercept)}\StringTok{`}\NormalTok{ =}\StringTok{ "Intercept"}\NormalTok{,}
+  \DataTypeTok{e17age =} \StringTok{"Age (Older Person)"}\NormalTok{,}
+  \DataTypeTok{c160age =} \StringTok{"Age (Carer)"}\NormalTok{,}
+  \DataTypeTok{c12hour =} \StringTok{"Hours per Week"}\NormalTok{,}
+  \DataTypeTok{barthtot =} \StringTok{"Barthel-Index"}\NormalTok{,}
+  \DataTypeTok{c161sex2 =} \StringTok{"Gender (Carer)"}\NormalTok{,}
+  \DataTypeTok{c172code2 =} \StringTok{"Education: middle (Carer)"}\NormalTok{,}
+  \DataTypeTok{c172code3 =} \StringTok{"Education: high (Carer)"}\NormalTok{,}
+  \DataTypeTok{a_non_used_label =} \StringTok{"We don't care"}
+\NormalTok{)}
+
+\KeywordTok{cbind}\NormalTok{(pl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  pl                         
+## (Intercept)      "Intercept"                
+## e17age           "Age (Older Person)"       
+## c160age          "Age (Carer)"              
+## c12hour          "Hours per Week"           
+## barthtot         "Barthel-Index"            
+## c161sex2         "Gender (Carer)"           
+## c172code2        "Education: middle (Carer)"
+## c172code3        "Education: high (Carer)"  
+## a_non_used_label "We don't care"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# see how pl is actually named, so you can still use the column names in the}
+\CommentTok{# model call but the pl variable holds more informative information that}
+\CommentTok{# includes words, spaces, capital letters etc..}
+
+\KeywordTok{tab_model}\NormalTok{(}
+\NormalTok{  m1, m2, m3, m4,}
+  \DataTypeTok{pred.labels =}\NormalTok{ pl,}
+  \DataTypeTok{dv.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Model1"}\NormalTok{, }\StringTok{"Model2"}\NormalTok{, }\StringTok{"Model3"}\NormalTok{, }\StringTok{"Model4"}\NormalTok{),}
+  \DataTypeTok{show.ci =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{show.p =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{transform =} \OtherTok{NULL}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Model1
+
+Model2
+
+Model3
+
+Model4
+
+Predictors
+
+Estimates
+
+Estimates
+
+Log-Mean
+
+Log-Odds
+
+Intercept
+
+87.15
+
+9.83
+
+-1.19
+
+1.88
+
+Age (Carer)
+
+-0.21
+
+0.01
+
+0.01
+
+Hours per Week
+
+-0.28
+
+0.02
+
+0.00
+
+Gender (Carer)
+
+-0.39
+
+0.43
+
+0.01
+
+0.63
+
+Education: middle (Carer)
+
+1.37
+
+0.39
+
+0.21
+
+Education: high (Carer)
+
+-1.64
+
+0.64
+
+0.31
+
+Age (Older Person)
+
+0.01
+
+Barthel-Index
+
+-0.03
+
+Observations
+
+821
+
+879
+
+840
+
+815
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+0.067 / 0.063
+
+0.083 / 0.106
+
+0.184 / 0.247
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Keep or remove coefficients from the table}
+\CommentTok{# Using the terms- or rm.terms-argument allows us to explicitly show or }
+\CommentTok{# remove specific coefficients from the table output.}
+
+\KeywordTok{tab_model}\NormalTok{(m1, }\DataTypeTok{terms =} \KeywordTok{c}\NormalTok{(}\StringTok{"c160age"}\NormalTok{, }\StringTok{"c12hour"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+carer'age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+average number of hoursof care per week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Note that the names of terms to keep or remove should match the coefficients}
+\CommentTok{#names. }
+
+\CommentTok{# For categorical predictors, one example would be, which will remove the}
+\CommentTok{# terms c172code2 and c161sex2 from the summary, even though those two}
+\CommentTok{# terms were still used to fit the final model:}
+
+\KeywordTok{tab_model}\NormalTok{(m1, }\DataTypeTok{rm.terms =} \KeywordTok{c}\NormalTok{(}\StringTok{"c172code2"}\NormalTok{, }\StringTok{"c161sex2"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Total score BARTHEL INDEX
+
+Predictors
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+87.15
+
+77.98~--~96.32
+
+\textless{}0.001
+
+carer'age
+
+-0.21
+
+-0.35~--~-0.07
+
+0.004
+
+average number of hoursof care per week
+
+-0.28
+
+-0.32~--~-0.24
+
+\textless{}0.001
+
+high level of education
+
+-1.64
+
+-7.21~--~3.93
+
+0.564
+
+Observations
+
+821
+
+R2 / adjusted R2
+
+0.271 / 0.266
+
+
+\end{document}
