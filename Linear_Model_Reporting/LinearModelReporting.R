@@ -18,7 +18,6 @@
 # Install packages in this order:
 # sjlabelled -> sjmisc -> sjstats -> ggeffects -> sjPlot
 
-
 # load packages
 library(sjPlot)
 library(sjmisc)
@@ -26,6 +25,12 @@ library(sjlabelled)
 
 ## sample data
 data(efc)
+str(efc)
+str(efc$c12hour)
+# each numeric parameter also has a label attached to it
+# see the Hmisc package:
+Hmisc::label(efc$c12hour)
+
 efc <- as_factor(efc, c161sex, c172code)
 
 # A simple HTML table from regression results
