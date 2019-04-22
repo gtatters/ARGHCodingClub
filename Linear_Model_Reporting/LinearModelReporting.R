@@ -4,19 +4,19 @@
 
 # tab_model() is the pendant to plot_model(), however, instead of creating 
 # plots, tab_model() creates HTML-tables that will be displayed either in your 
-# IDE’s viewer-pane, in a web browser or in a knitr-markdown-document 
- 
-# HTML is the only output-format, you can’t (directly) create a LaTex or PDF 
+# IDE's viewer-pane, in a web browser or in a knitr-markdown-document 
+
+# HTML is the only output-format, you can't (directly) create a LaTex or PDF 
 # output from tab_model() and related table-functions. However, it is possible
 # to easily export the tables into Microsoft Word or Libre Office Writer.
 
 # This vignette shows how to create table from regression models with tab_model(). 
- 
-# Note! Due to the custom CSS, the layout of the table inside a
-# knitr-document differs from the output in the viewer-pane and web browser!
-   
+
+# Note. Due to the custom CSS, the layout of the table inside a
+# knitr-document differs from the output in the viewer-pane and web browser.
+
 # Install packages in this order:
-# sjlabelled → sjmisc → sjstats → ggeffects → sjPlot
+# sjlabelled -> sjmisc -> sjstats -> ggeffects -> sjPlot
 
 
 # load packages
@@ -30,7 +30,7 @@ efc <- as_factor(efc, c161sex, c172code)
 
 # A simple HTML table from regression results
 # First, we fit two linear models to demonstrate the tab_model()-function.
- 
+
 m1 <- lm(barthtot ~ c160age + c12hour + c161sex + c172code, data = efc)
 m2 <- lm(neg_c_7 ~ c160age + c12hour + c161sex + e17age, data = efc)
 
@@ -52,7 +52,6 @@ str(efc$c12hour)
 # are already labelled in this example. The name of the dependent variable(s) 
 # is used as main column header for each model. For non-labelled data, the 
 # coefficient names are shown.
- 
 
 # Turn off automatic labelling
 # To turn off automatic labelling, use auto.label = FALSE, or provide an empty
@@ -77,7 +76,6 @@ tab_model(m1)
 tab_model(m1.0)
 
 
-
 # More than one model
 # tab_model() can print multiple models at once, which are then printed 
 # side-by-side. Identical predictor coefficients are matched in a row.
@@ -93,17 +91,17 @@ tab_model(m1, m2)
 # shown in the summary.
 
 m3 <- glm(
-   tot_sc_e ~ c160age + c12hour + c161sex + c172code, 
-   data = efc, family = poisson(link = "log")
+  tot_sc_e ~ c160age + c12hour + c161sex + c172code, 
+  data = efc, family = poisson(link = "log")
 )
 
 efc$neg_c_7d <- ifelse(efc$neg_c_7 < median(efc$neg_c_7, na.rm = TRUE), 0, 1)
 
 m4 <- glm(
- neg_c_7d ~ c161sex + barthtot + c172code,
-   data = efc, family = binomial(link = "logit")
+  neg_c_7d ~ c161sex + barthtot + c172code,
+  data = efc, family = binomial(link = "logit")
 )
- 
+
 tab_model(m3, m4)
 
 
@@ -175,23 +173,23 @@ tab_model(m3, m4, show.ci = FALSE, show.p = FALSE, auto.label = FALSE)
 # Removing and sorting columns
 # Another way to remove columns, which also allows to reorder the columns, 
 # is the col.order-argument. This is a character vector, where each element
-# indicates a column in the output. The value "est", for instance, 
-# indicates the estimates, while "std.est" is the column for standardized
+# indicates a column in the output. The value est, for instance, 
+# indicates the estimates, while std.est is the column for standardized
 # estimates and so on.
-# 
+
 # By default, col.order contains all possible columns. All columns that
 # should shown (see previous tables, for example using show.se = TRUE to 
 # show standard errors, or show.st = TRUE to show standardized estimates) are 
 # then printed by default. Colums that are excluded from col.order are not 
-# shown, no matter if the show*-arguments are TRUE or FALSE. 
+# shown, no matter if the show-arguments are TRUE or FALSE. 
 # So if show.se = TRUE, but col.order does not contain the element "se", 
 # standard errors are not shown. On the other hand, if show.est = FALSE,
 # but col.order does include the element "est", the columns with estimates 
 # are not shown.
-# 
 # In summary, col.order can be used to exclude columns from the table and 
 # to change the order of colums.
-#
+
+
 tab_model(
   m1, show.se = TRUE, show.std = TRUE, show.stat = TRUE,
   col.order = c("p", "stat", "est", "std.se", "se", "std.est")
@@ -213,7 +211,7 @@ tab_model(m1, collapse.ci = TRUE)
 # in the Predictor column.
 # dv.labels to change the names of the model columns, which are labelled with 
 # the variable labels / names from the dependent variables.
-# Furthermore, there are various string.*-arguments, to change the name of 
+# Furthermore, there are various string-arguments, to change the name of 
 # column headings.
 
 tab_model(
@@ -287,7 +285,7 @@ tab_model(
 tab_model(m1, terms = c("c160age", "c12hour"))
 
 # Note that the names of terms to keep or remove should match the coefficients
-#names. 
+# names. 
 
 # For categorical predictors, one example would be, which will remove the
 # terms c172code2 and c161sex2 from the summary, even though those two
@@ -296,6 +294,9 @@ tab_model(m1, terms = c("c160age", "c12hour"))
 tab_model(m1, rm.terms = c("c172code2", "c161sex2"))
 
 
+# For How to format an Anova table output see:
+
+# http://www.understandingdata.net/2017/05/11/anova-tables-in-r/
 
 
 
