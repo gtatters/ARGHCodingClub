@@ -28,8 +28,8 @@ data(efc)
 str(efc)
 str(efc$c12hour)
 # each numeric parameter also has a label attached to it
-# see the Hmisc package:
-Hmisc::label(efc$c12hour)
+# see the Hmisc package: 
+Hmisc::label(efc$c12hour)<-"My own label is not very useful"
 
 efc <- as_factor(efc, c161sex, c172code)
 
@@ -37,6 +37,8 @@ efc <- as_factor(efc, c161sex, c172code)
 # First, we fit two linear models to demonstrate the tab_model()-function.
 
 m1 <- lm(barthtot ~ c160age + c12hour + c161sex + c172code, data = efc)
+m1.1 <- lm(barthtot ~ c160age + c12hour + c161sex, data = efc)
+tab_model(m1)
 m2 <- lm(neg_c_7 ~ c160age + c12hour + c161sex + e17age, data = efc)
 
 # The simplest way of producing the table output is by passing the fitted model
@@ -46,7 +48,7 @@ m2 <- lm(neg_c_7 ~ c160age + c12hour + c161sex + e17age, data = efc)
 
 summary(m1)
 # compare summary to tab_model:
-tab_model(m1)
+tab_model(m1, file="M1.html")
 
 # Automatic labelling
 colnames(efc)
@@ -79,7 +81,7 @@ tab_model(m.mtcars,
 m1.0 <- lm(barthtot ~ c160age + c12hour + c161sex + c172code - 1, data = efc)
 tab_model(m1)
 tab_model(m1.0)
-
+str(efc$e16sex)
 
 # More than one model
 # tab_model() can print multiple models at once, which are then printed 
@@ -109,6 +111,7 @@ m4 <- glm(
 
 tab_model(m3, m4)
 
+summary(m3)
 
 # Untransformed estimates on the linear scale
 # To plot the estimates on the linear scale, use transform = NULL.
