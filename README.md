@@ -29,7 +29,7 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 ### Spring/Summer schedule: No formal plans unless suggestions arise
 
 - [July 22 - Special Guest Session by Dr. Dimitri Skandalis](https://github.com/gtatters/ARGHCodingClub//tree/master/GAMs) 
-
+ 
 
 ## Content 
 
