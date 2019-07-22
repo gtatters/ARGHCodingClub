@@ -27,6 +27,7 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Apr 22 - Tattersall: Reporting on linear models](https://github.com/gtatters/ARGHCodingClub//tree/master/Linear_Model_Reporting) 
 
 - Spring/Summer schedule: No formal plans unless suggestions arise.  Due to summer research travel and participant field work, I suggest we reconvene ARGH in September.  
+- [July 22 - Special Guest Session by Dr. Dimitri Skandalis])(https://github.com/gtatters/ARGHCodingClub//tree/master/GAMs) 
 
 
 ## Content 
