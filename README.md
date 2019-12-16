@@ -16,15 +16,18 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - Data and code examples may be uploaded to this site, so be able to provide sample datasets if necessary. 
 
 
-## When, Where, What
+## When, Where
 
-- Every other monday, starting Monday, January 6
-- 12 - 1 pm (unless otherwise noted) 
-- Digital Scholarship Laboratory
+- Schedule: Every other monday, starting Monday, January 6
+- Time: 12 - 1 pm (unless otherwise noted) 
+- Location: Digital Scholarship Laboratory
+
+## Details
+
 - Bring your laptop with R/Rstudio installed
-- Bring current problems you need help with
-- Bring novel solutions you want to share
-- Be willing to help with R
+- Bring current problems or challenges in R you need help with
+- Bring novel solutions in R you want to share
+- Be willing to help others with R solutions
 
 
 ## Sessions from 2018
@@ -39,6 +42,9 @@ We want to replace statistics anxiety and code fear with inspiration and motivat
 - [Apr 22 - Tattersall: Reporting on linear models](https://github.com/gtatters/ARGHCodingClub//tree/master/Linear_Model_Reporting) 
 - [July 22 - Special Guest Session by Dr. Dimitri Skandalis](https://github.com/gtatters/ARGHCodingClub//tree/master/GAMs) 
  
+## Suggestions?
+
+- Contact Glenn Tattersall with suggestions
 
 ## Contact
 
