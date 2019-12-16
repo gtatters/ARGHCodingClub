@@ -15,11 +15,11 @@ t <- sort(runif(n, 0,n))
 # autocorrelated stationary errors, see
 # https://stats.stackexchange.com/questions/29239/creating-auto-correlated-random-values-in-r
 ctrl <- cos(t/5) + exp(t/200) + 5 +
-  stats::filter(rnorm(n,0,0.1), filter=rep(1,3), circular=TRUE)
+  stats::filter(rnorm(n,0,.1), filter=rep(1,3), circular=TRUE)
 trt1 <- cos(t/5) + exp(t/200) + 20 +
-  stats::filter(rnorm(n,0,0.1), filter=rep(1,3), circular=TRUE)
+  stats::filter(rnorm(n,0,.1), filter=rep(1,3), circular=TRUE)
 trt2 <- cos(t/5) + exp(t/400) + 5 +
-  stats::filter(rnorm(n,0,0.1), filter=rep(1,3), circular=TRUE)
+  stats::filter(rnorm(n,0,.1), filter=rep(1,3), circular=TRUE)
 
 
 dat <- data.frame(t = rep(t,3),
@@ -30,7 +30,7 @@ dat %>%
   ggplot( aes(x=t, y=resp, Group=Treat, col=Treat) ) +
   geom_line() +
   geom_point() +
-  geom_smooth() +
+  geom_smooth(method="gam") +
   theme_classic()
 
 # smooth model of just the control - REML
@@ -39,7 +39,8 @@ mod1_gcv <- gam( resp ~ s(t),
                  method='REML' )
 summary(mod1_gcv)
 
-visreg(mod1_gcv); gam.check(mod1_gcv)
+visreg(mod1_gcv)
+gam.check(mod1_gcv)
 
 # smooth model of just the control - cross validation (default)
 mod2_gcv <- gam( resp ~ s(t, bs='ad'), 
@@ -133,7 +134,7 @@ dat_re_slp %>%
 mod6 <- gam( resp ~ 
                s(t) + 
                s(Ind,bs='re') +
-               s(t,Ind,bs='re'),
+               s(t,by=Ind,bs='re'),
              method='ML',
              data=dat_re_slp )
 
