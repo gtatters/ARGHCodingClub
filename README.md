@@ -3,9 +3,9 @@
 
 ## ARGH Coding Club
 
-Our mission is to facilitate a collaborative and supportive environment where students, post-docs, and faculty may develop data analysis, graphical, programming, and statistics skills together, using R. 
+- Our mission is to facilitate a collaborative and supportive environment where students, post-docs, and faculty may develop data analysis, graphical, programming, and statistics skills together, using R. 
 
-We want to replace statistics anxiety and code fear with inspiration and motivation to learn, and here we will share our experience.
+- We want to replace statistics anxiety or code fear with inspiration and motivation to learn.
 
 ## Content 
 
