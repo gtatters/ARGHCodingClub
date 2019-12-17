@@ -51,6 +51,7 @@ Glenn Tattersall
 Department of Biological Sciences  
 Brock University
 
-William Hall
-Department of Psychology
-Brock University
+William Hall  
+Department of Psychology  
+Brock University  
+
