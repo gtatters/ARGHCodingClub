@@ -7,11 +7,13 @@
 
 - We want to replace statistics anxiety or code fear with inspiration and motivation to learn.
 
-## Content 
+## Objectives 
 
-- If willing, each week, a lead presenter demonstrates code for a graphical, statistical, or analytical problem they have mastered or are currently working on.  Presenters may use their own data or data from published sources.
+- If willing or available, a lead presenter demonstrates code for a graphical, statistical, or analytical problem they have mastered or are currently working on.  Presenters may use their own data or data from published sources.
 
 - If no presenters, then the sessions will be R help sessions for fellow researchers. 
+
+- Bring work in progress and simply use the time to work on code, ask or answer questions others might have.
 
 - Data and code examples may be uploaded to this site, so be able to provide sample datasets if necessary. 
 
@@ -42,12 +44,13 @@
 - [Apr 22 - Tattersall: Reporting on linear models](https://github.com/gtatters/ARGHCodingClub//tree/master/Linear_Model_Reporting) 
 - [July 22 - Special Guest Session by Dr. Dimitri Skandalis](https://github.com/gtatters/ARGHCodingClub//tree/master/GAMs) 
  
-## Suggestions?
 
-- Contact Glenn Tattersall with suggestions
-
-## Contact
+## Contacts
 
 Glenn Tattersall  
 Department of Biological Sciences  
+Brock University
+
+William Hall
+Department of Psychology
 Brock University
