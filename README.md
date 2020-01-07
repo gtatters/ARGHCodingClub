@@ -1,7 +1,7 @@
 
 <img src="https://raw.githubusercontent.com/gtatters/ARGHCodingClub/master/Images/ARGHlogo.jpg" alt="ARGH logo" width="400"/>
 
-## ARGH Coding Club
+## ARGH Coding Club / R Users Group
 
 - Our mission is to facilitate a collaborative and supportive environment where students, post-docs, and faculty may develop data analysis, graphical, programming, and statistics skills together, using R. 
 
