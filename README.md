@@ -31,8 +31,18 @@
 - Bring novel solutions in R you want to share
 - Be willing to help others with R solutions
 
+## 2020 Sessions
 
-## Sessions from 2018
+- Jan 20 - Hall: Introduction to the Tidyverse
+- Feb 3 - Tattersall: Figure preparation for manuscripts/theses using ggplot2
+- Feb 17 - reading week
+- Mar 2 - Open
+- Mar 16 - Open
+- Mar 30 - Open
+- Apr 6 - Open
+
+
+## Sessions from 2019
 
 - [Jan 14 - Tattersall: Mean + Error Plots](https://github.com/gtatters/ARGHCodingClub//tree/master/Mean_Error_Dot_Plot)
 - [Jan 28 - Richards: Trait mapping code](https://github.com/gtatters/ARGHCodingClub//tree/master/Trait_Mapping)
