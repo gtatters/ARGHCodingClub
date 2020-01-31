@@ -33,7 +33,7 @@
 
 ## 2020 Sessions
 
-- Jan 20 - Hall: Introduction to the Tidyverse
+- Jan 20 - Hall: Introduction to the Tidyverse(https://github.com/gtatters/ARGHCodingClub//tree/master/Tidyverse)
 - Feb 3 - Tattersall: Figure preparation for manuscripts/theses using ggplot2
 - Feb 17 - reading week
 - Mar 2 - Open
