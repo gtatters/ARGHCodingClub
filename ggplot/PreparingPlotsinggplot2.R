@@ -2,7 +2,6 @@ rm(list=ls())
 
 # http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
-
 # Libraries used
 library(lme4)
 # library(lmerTest) # we use this below but it conflicts with lme4's lmer function
@@ -132,11 +131,27 @@ ET1.plot<-ggplot()+
   theme(panel.border = element_rect(fill=NA, colour=NA))
 ET1.plot
 
-ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds.pdf", 
-       ET1.plot,  width=4, height=4)
 save(ET1.plot, file="Mygraph.Rda")
-ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds.tiff", 
+
+ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds_4x4in.pdf", 
        ET1.plot,  width=4, height=4)
+ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds_4x4cm.pdf", 
+       ET1.plot,  width=4, height=4, units="cm")
+
+ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds_4x4in.tiff",
+       ET1.plot, width=4, height=4)
+ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds_4x4in_600dpi.tiff",
+       dpi=600,
+       ET1.plot, width=4, height=4)
+ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds_4x4cm.tiff",
+       dpi=600, 
+       ET1.plot, width=4, height=4, units="cm")
+
+# Using Vector based graphics (pdf, eps) - the output is mostly scaleable, but 
+# exported sizes of fonts will need tweaking
+# Using Raster Graphics output (tiff, png, jpg, bmp) will require a lot of
+# trial and error to get sizes of lines, points, and fonts correct
+
 
 
 
@@ -175,9 +190,13 @@ biplot
 
 ggsave("Figure 2.pdf", biplot, width=8, height=4)
 
+SE_emersion.plot+theme_grey()
+biplot+theme_grey()
+biplot+theme_bw()
 
-
-theme_grey
+library(ggthemes)
+ET1.plot+theme_economist()
+ET1.plot+theme_gdocs()
 
 
 # ggtheme settings ####
@@ -219,5 +238,8 @@ ggtheme <- function(base_size=12, base_line=0.3) {
     plot.title =        element_text(size = base_size * 1.2),
     plot.background =   element_rect(colour = "transparent", fill="transparent", size=base_line)
   )}
+
+ET1.plot+ggtheme(12, 0.1)
+
 
 
