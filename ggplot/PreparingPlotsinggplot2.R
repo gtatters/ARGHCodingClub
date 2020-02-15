@@ -7,7 +7,7 @@ library(lme4)
 # library(lmerTest) # we use this below but it conflicts with lme4's lmer function
 library(effects)
 library(ggplot2)
-library(dplyr)
+library(tidyverse)
 
 # Load in data
 setwd("~/Dropbox/ARGHCodingClub/ggplot")
@@ -33,7 +33,7 @@ d$MirrorScore<-d$MCNum+d$LDNum
 # Normalise the counts to the duration of the experiment
 
 
-# Create two functions to allow 95% CI to be calculated
+# Create two functions to allow 95% CI approximation to be calculated
 lower<-function(x){
   xbar<-mean(x)
   se<-sd(x)/sqrt(length(x))
@@ -48,16 +48,17 @@ upper<-function(x){
   return(lwr)
 }
 
-# summarise data using dplyr piping (%>%)
+# summarise data using piping (%>%)
 ds<-d[c("Treatment", "ET1")] %>%
   group_by(Treatment) %>%
-  summarise_all(funs(mean, lower, upper))
+  summarize(mean=mean(ET1), lower=lower(ET1), upper=upper(ET1))
 ds
 
 
 
 # Model Fits ####
 lmET1<-lmer(ET1 ~ Treatment + Order + (1|FishID), data=d)
+car::Anova(lmET1)
 # Explicitly call lmerTest's lmer function:
 lmET1<-lmerTest::lmer(ET1 ~ Treatment + (1|FishID), data=d)
 summary(lmET1)
@@ -75,14 +76,16 @@ effET1
 
 # Emersion Threshold Figure ####
 
-dodge<-position_dodge(width=.1)
-ET1.plot<-ggplot()+
-  geom_line(data=d, aes(x=Treatment, y=ET1,  group=FishID), 
-            col="grey", position=dodge)
-ET1.plot
 
 ET1.plot<-ggplot()+
-  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), col="grey", position=dodge)+
+  geom_line(data=d, aes(x=Treatment, y=ET1,  group=FishID), 
+            col="grey")
+ET1.plot
+
+dodge<-position_dodge(width=.1)
+ET1.plot<-ggplot()+
+  geom_line(data=d, aes(x=Treatment, y=ET1, group=FishID), col="grey", 
+            position=dodge)+
   geom_point(data=d, aes(x=Treatment, y=ET1, fill=Treatment, group=FishID), shape=21, position=dodge, size=0.5)
 ET1.plot
 
@@ -122,7 +125,9 @@ ET1.plot<-ggplot()+
              col="black", shape=21, size=3)+
   #annotate("label", x=1.5, y=43.5, label = effET1$P[1], size=3, label.size=NA)+
   scale_fill_manual(values=c("black", "white"), name="", guide=F)+
-  ylab("Emersion\nTemperature (°C)")+
+  #ylab("Emersion\nTemperature (°C)")+
+  ylab(expression('Emersion Temperature ('*degree*'C)'))+
+  #ylab(expression('Emersion Temperature ('*~degree*'C)'))+
   xlab("Treatment")+
   ylim(39,43.5)+
   theme_classic()+
@@ -132,6 +137,10 @@ ET1.plot<-ggplot()+
 ET1.plot
 
 save(ET1.plot, file="Mygraph.Rda")
+ET1.plot<-NULL
+ET1.plot
+load("Mygraph.Rda")
+ET1.plot
 
 ggsave("Figure 1 - Mirror vs Opaque Emersion Thresholds_4x4in.pdf", 
        ET1.plot,  width=4, height=4)
@@ -167,12 +176,16 @@ anova(lmSE, ddf="Satterthwaite")
 effSE<-data.frame(Effect("Treatment", lmSE), P=c("P = 0.00061", NA))
 
 SE_emersion.plot<-ggplot()+
-  geom_line(data=d, aes(x=Treatment, y=SurfaceScore, group=FishID), col="grey", position=dodge)+
-  geom_point(data=d, aes(x=Treatment, y=SurfaceScore, fill=Treatment, group=FishID), shape=21, position=dodge, size=0.5)+
-  geom_errorbar(data=effSE, aes(x=Treatment, ymin=lower, ymax=upper), width=0.05, size=0.5)+
-  geom_point(data=effSE, aes(x=Treatment, y=fit, fill=Treatment), col="black", shape=21, size=3)+
+  geom_line(data=d, aes(x=Treatment, y=SurfaceScore, group=FishID), 
+            col="grey", position=dodge)+
+  geom_point(data=d, aes(x=Treatment, y=SurfaceScore, fill=Treatment, 
+                         group=FishID), shape=21, position=dodge, size=0.5)+
+  geom_errorbar(data=effSE, aes(x=Treatment, ymin=lower, ymax=upper),
+                width=0.05, size=0.5)+
+  geom_point(data=effSE, aes(x=Treatment, y=fit, fill=Treatment),
+             col="black", shape=21, size=3)+
   annotate("label", x=1.5, y=10, label = effSE$P[1], size=3, label.size=NA)+
-  scale_fill_manual(values=c("black", "white"), name="", guide=F)+
+  scale_fill_manual(values=c("black", "white"), name="")+
   scale_y_continuous(breaks=c(0,2,4,6,8,10))+
   ylab(expression("Surface Behaviours (min"^-1*")", adj=0.5))+ 
   xlab("Treatment")+
@@ -198,7 +211,9 @@ library(ggthemes)
 ET1.plot+theme_economist()
 ET1.plot+theme_gdocs()
 
-
+# You can create your own theme function
+# Involves a lot of theme calls
+theme_grey
 # ggtheme settings ####
 ggtheme <- function(base_size=12, base_line=0.3) {
   #theme_bw() %+replace%
@@ -214,7 +229,7 @@ ggtheme <- function(base_size=12, base_line=0.3) {
     
     axis.title.x =  element_text(size = base_size, vjust = 1, margin=unit(c(3,0,0,0),"mm")),
     axis.title.y =  element_text(size = base_size, angle = 90, vjust = 0.5, margin=unit(c(0,3,0,0),"mm")),
-    axis.ticks = element_line(size=base_line),
+    axis.ticks =    element_line(size=base_line),
     axis.ticks.length = unit(0.3, "lines"),
     
     panel.background = element_blank(),
@@ -240,6 +255,4 @@ ggtheme <- function(base_size=12, base_line=0.3) {
   )}
 
 ET1.plot+ggtheme(12, 0.1)
-
-
 

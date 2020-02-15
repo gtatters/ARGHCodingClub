@@ -34,9 +34,9 @@
 ## 2020 Sessions
 
 - [Jan 20 - Hall: Introduction to the Tidyverse](https://github.com/gtatters/ARGHCodingClub//tree/master/Tidyverse)
-- Feb 3 - Tattersall: Figure preparation for manuscripts/theses using ggplot2
+- [Feb 3 - Tattersall: Figure preparation for manuscripts/theses using ggplot2](https://github.com/gtatters/ARGHCodingClub//tree/master/ggplot)
 - Feb 17 - reading week
-- Mar 2 - Open
+- [Mar 2 - Data Sharing and organising research projects](https://github.com/gtatters/ARGHCodingClub//tree/master/Organising_Research_Data)
 - Mar 16 - Open
 - Mar 30 - Open
 - Apr 6 - Open
