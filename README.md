@@ -31,7 +31,7 @@
 - Bring novel solutions in R you want to share
 - Be willing to help others with R solutions
 
-## 2020 Sessions
+## Sessions from 2020
 
 - [Jan 20 - Hall: Introduction to the Tidyverse](https://github.com/gtatters/ARGHCodingClub//tree/master/Tidyverse)
 - [Feb 3 - Tattersall: Figure preparation for manuscripts/theses using ggplot2](https://github.com/gtatters/ARGHCodingClub//tree/master/ggplot)
